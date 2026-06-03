@@ -1,0 +1,46 @@
+# Machine-Vision-Screening -- Python dependencies for the full pipeline.
+#
+# Quickstart (CPU-only PyTorch; works everywhere, but training in stage 6
+# is unusably slow without a GPU):
+#
+#     conda create -n mvs python=3.10 -y
+#     conda activate mvs
+#     pip install -r requirements.txt
+#
+# For GPU training (recommended for stage 6), install the CUDA-matched
+# PyTorch wheel BEFORE running `pip install -r requirements.txt`:
+#
+#     conda create -n mvs python=3.10 -y
+#     conda activate mvs
+#     pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+#     pip install -r requirements.txt
+#
+# Two pieces of setup are NOT pip-installable -- see README.md
+# (Environment setup section) for the steps:
+#   - SAM-2 (used by script 02): install from GitHub + download the
+#     sam2.1_hiera_large.pt checkpoint.
+#   - ROS 2 Jazzy (used by script 03 ONLY when processing .db3 files):
+#     system-level install, sourced at run time with
+#     `source /opt/ros/jazzy/setup.bash`.
+
+# --- Core scientific stack ---------------------------------------------------
+numpy
+opencv-python>=4.8
+PyYAML
+matplotlib
+pandas
+tqdm
+
+# --- YOLOv8-seg training / inference (pulls in torch automatically) ---------
+ultralytics>=8.4.11
+albumentations>=1.4
+
+# --- COCO label tooling ------------------------------------------------------
+pycocotools
+
+# --- RealSense .bag reading (script 03, .bag files only) --------------------
+pyrealsense2
+
+# --- Jupyter for the training notebook (script 06) --------------------------
+jupyterlab
+ipykernel
